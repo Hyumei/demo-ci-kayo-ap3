@@ -67,7 +67,7 @@ Ou seja, você irá configurar um servidor de CI na sua própria cópia do repos
 Clone o repositório para sua máquina local, usando o seguinte comando (onde `<USER>` deve ser substituído pelo seu usuário no GitHub):
 
 ```bash
-git clone https://github.com/<USER>/demo-ci.git
+git clone https://github.com/<USER>/demo-ci-kayo-ap3.git
 ```
 
 Em seguida, copie o código a seguir para um arquivo com o seguinte nome: `.github/workflows/actions.yaml`. Isto é, crie diretórios `.github` e depois `workflows` e salve o código abaixo no arquivo `actions.yaml`.
@@ -86,22 +86,22 @@ on:
 
 jobs:
   pipeline:
-    runs-on: ubuntu-latest # Os comandos serão executados em um sistema operacional Linux
+    runs-on: ubuntu-latest 
 
     steps:
       - name: Git Checkout
-        uses: actions/checkout@v2 # Faz o checkout do código recebido
+        uses: actions/checkout@v2
 
       - name: Set up JDK 1.8
-        uses: actions/setup-java@v1 # Configura o Java 1.8
+        uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
       - name: Build
-        run: mvn package -Dmaven.test.skip=true # Compila o código fonte
+        run: mvn package -Dmaven.test.skip=true
 
       - name: Unit Test
-        run: mvn test # Executada os testes de unidade
+        run: mvn test
 ```
 
 Esse arquivo ativa e configura o GitHub Actions para -- toda vez que ocorrer um evento `push` ou `pull_request` tendo como alvo a branch principal do repositório -- realizar três tarefas (jobs):
@@ -116,7 +116,7 @@ Realize um `commit` e um `git push`, isto é:
 
 ```bash
 git add --all
-git commit -m "Configurando GitHub Actions"
+git commit -m "Preparando GitHub Actions"
 git push origin main
 ```
 
@@ -136,7 +136,7 @@ Para finalizar, vamos introduzir um pequeno bug no programa de exemplo e enviar 
 
 #### Passo 1
 
-Introduza um pequeno bug na função `soma` do arquivo [src/main/java/br/ufmg/dcc/Calculadora.java](https://github.com/rodrigo-brito/roteiro-github-actions/blob/main/src/main/java/br/ufmg/dcc/Calculadora.java). Por exemplo, basta alterar a linha 6, alterando o retorno da função para `x + y + 1`, como apresentado abaixo.
+Introduza um pequeno bug na função `soma` do arquivo [src/main/java/br/ufmg/dcc/Calculadora.java](https://github.com/rodrigo-brito/roteiro-github-actions/blob/main/src/main/java/br/ufmg/dcc/Calculadora.java). Por exemplo, basta alterar a linha 6, alterando o retorno da função para `x + y + 13`, como apresentado abaixo.
 
 ```diff
 --- a/src/main/java/br/ufmg/dcc/Calculadora.java
@@ -146,7 +146,7 @@ Introduza um pequeno bug na função `soma` do arquivo [src/main/java/br/ufmg/dc
 
    public int soma(int x, int y) {
 -    return x + y;
-+    return x + y + 1;
++    return x + y + 13;
    }
 
    public int subtrai(int x, int y) {
@@ -159,13 +159,13 @@ Após modificar o código, você deve criar um novo branch, realizar um `commit`
 ```bash
 git checkout -b bug
 git add --all
-git commit -m "Incluindo alterações na função soma"
+git commit -m "Alterando a função soma"
 git push origin bug
 ```
 
 #### Passo 3
 
-Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/demo-ci/compare/main...bug`, onde `<USER>` deve ser substituido pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
+Em seguida, crie um Pull Request (PR) com sua modificação. Para isso, basta acessar a seguinte URL em seu navegador: `https://github.com/<USER>/demo-ci-kayo-ap3/compare/main...bug`, onde `<USER>` deve ser substituido pelo seu usuário no GitHub. Nessa janela, você pode conferir as modificações feitas e incluir uma pequena descrição no PR.
 
 <p align="center">
     <img width="70%" src="https://user-images.githubusercontent.com/7620947/111704705-5b793a80-881e-11eb-8422-22d51bde6b19.png" />
